@@ -24,16 +24,17 @@ df_without_covid = df.drop(df[df['Condition']=='COVID-19'].index)
 younger_than_35 = df_without_covid[(df_without_covid['Age Group'] == '0-24') | (df_without_covid['Age Group'] == '25-34')]
 
 # Create a new dataframe ordered by number of deaths
-ordered_by_deaths = younger_than_35.sort_values(by='COVID-19 Deaths', ascending=False) 
-max_deaths = ordered_by_deaths['COVID-19 Deaths'][1] # Select the maximum number of deaths from the dataframe
-max_deaths_condition = ordered_by_deaths['Condition'][1] # Select the condition with the maximum number of deaths from the dataframe
-print(f'\nThe comorbidity with the highest amount of deaths below age 35 was " {max_deaths_condition} " with {max_deaths} deaths\n') # Print results
+ordered_by_deaths = younger_than_35.groupby(['Condition']).sum().sort_values(by='COVID-19 Deaths', ascending=False).reset_index()
+max_deaths = ordered_by_deaths['COVID-19 Deaths'][0] # Select the maximum number of deaths from the dataframe
+max_deaths_condition = ordered_by_deaths['Condition'][0] # Select the condition with the maximum number of deaths from the dataframe
+print(f'\nThe comorbidity with the highest amount of deaths below age 35 was "{max_deaths_condition}" with {max_deaths} deaths\n') # Print results
 
 # Create dataframe with number of deaths by age group
 deaths_by_age_group = df_without_covid.groupby(['Age Group']).sum() 
 # Remove 'All Ages' and 'Not stated'
 deaths_by_age_group = deaths_by_age_group[deaths_by_age_group.index != 'All Ages']
 deaths_by_age_group = deaths_by_age_group[deaths_by_age_group.index != 'Not stated']
+print(deaths_by_age_group)
 
 # Create list of names and values for the bar chart
 names = list(deaths_by_age_group.index)
