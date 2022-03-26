@@ -1,0 +1,85 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+    
+      <meta charset="utf-8">
+      <title>Average Enrollment by Course</title>
+      
+      
+        
+          
+        
+        
+          
+        <script type="text/javascript" src="https://cdn.bokeh.org/bokeh/release/bokeh-2.4.2.min.js"></script>
+        <script type="text/javascript">
+            Bokeh.set_log_level("info");
+        </script>
+        
+      
+      
+    
+  </head>
+  
+  
+  <body>
+    
+      
+        
+          
+          
+            
+              <div class="bk-root" id="bfc3d1c7-8fc5-4ee9-8ec1-13f85c4a2242" data-root-id="1345"></div>
+            
+          
+        
+      
+      
+        <script type="application/json" id="1487">
+          {"ee1f119f-d8a0-4a95-811e-3ff70fc1bee1":{"defs":[],"roots":{"references":[{"attributes":{"axis":{"id":"1359"},"coordinates":null,"dimension":1,"group":null,"ticker":null},"id":"1362","type":"Grid"},{"attributes":{},"id":"1373","type":"AllLabels"},{"attributes":{},"id":"1363","type":"Toolbar"},{"attributes":{"start":0},"id":"1350","type":"DataRange1d"},{"attributes":{},"id":"1354","type":"LinearScale"},{"attributes":{},"id":"1375","type":"CategoricalTickFormatter"},{"attributes":{},"id":"1360","type":"BasicTicker"},{"attributes":{"fill_alpha":{"value":0.2},"fill_color":{"value":"#1f77b4"},"hatch_alpha":{"value":0.2},"line_alpha":{"value":0.2},"line_color":{"value":"#1f77b4"},"top":{"field":"top"},"width":{"value":0.9},"x":{"field":"x"}},"id":"1367","type":"VBar"},{"attributes":{"factors":["EM","ES","ISE","SSW","SYS"]},"id":"1348","type":"FactorRange"},{"attributes":{},"id":"1377","type":"UnionRenderers"},{"attributes":{"fill_alpha":{"value":0.1},"fill_color":{"value":"#1f77b4"},"hatch_alpha":{"value":0.1},"line_alpha":{"value":0.1},"line_color":{"value":"#1f77b4"},"top":{"field":"top"},"width":{"value":0.9},"x":{"field":"x"}},"id":"1366","type":"VBar"},{"attributes":{},"id":"1376","type":"AllLabels"},{"attributes":{},"id":"1378","type":"Selection"},{"attributes":{"coordinates":null,"data_source":{"id":"1364"},"glyph":{"id":"1365"},"group":null,"hover_glyph":null,"muted_glyph":{"id":"1367"},"nonselection_glyph":{"id":"1366"},"view":{"id":"1369"}},"id":"1368","type":"GlyphRenderer"},{"attributes":{"fill_color":{"value":"#1f77b4"},"line_color":{"value":"#1f77b4"},"top":{"field":"top"},"width":{"value":0.9},"x":{"field":"x"}},"id":"1365","type":"VBar"},{"attributes":{"axis":{"id":"1356"},"coordinates":null,"grid_line_color":null,"group":null,"ticker":null},"id":"1358","type":"Grid"},{"attributes":{"below":[{"id":"1356"}],"center":[{"id":"1358"},{"id":"1362"}],"left":[{"id":"1359"}],"renderers":[{"id":"1368"}],"title":{"id":"1346"},"toolbar":{"id":"1363"},"toolbar_location":null,"x_range":{"id":"1348"},"x_scale":{"id":"1352"},"y_range":{"id":"1350"},"y_scale":{"id":"1354"}},"id":"1345","subtype":"Figure","type":"Plot"},{"attributes":{"axis_label":"# of Students","coordinates":null,"formatter":{"id":"1372"},"group":null,"major_label_policy":{"id":"1373"},"ticker":{"id":"1360"}},"id":"1359","type":"LinearAxis"},{"attributes":{"data":{"top":[182.16666666666666,30.0,29.5,276.0,275.6666666666667],"x":["EM","ES","ISE","SSW","SYS"]},"selected":{"id":"1378"},"selection_policy":{"id":"1377"}},"id":"1364","type":"ColumnDataSource"},{"attributes":{"axis_label":"Course","coordinates":null,"formatter":{"id":"1375"},"group":null,"major_label_policy":{"id":"1376"},"ticker":{"id":"1357"}},"id":"1356","type":"CategoricalAxis"},{"attributes":{"source":{"id":"1364"}},"id":"1369","type":"CDSView"},{"attributes":{},"id":"1357","type":"CategoricalTicker"},{"attributes":{},"id":"1352","type":"CategoricalScale"},{"attributes":{},"id":"1372","type":"BasicTickFormatter"},{"attributes":{"coordinates":null,"group":null,"text":"Average Enrollment by Course"},"id":"1346","type":"Title"}],"root_ids":["1345"]},"title":"Bokeh Application","version":"2.4.2"}}
+        </script>
+        <script type="text/javascript">
+          (function() {
+            const fn = function() {
+              Bokeh.safely(function() {
+                (function(root) {
+                  function embed_document(root) {
+                    
+                  const docs_json = document.getElementById('1487').textContent;
+                  const render_items = [{"docid":"ee1f119f-d8a0-4a95-811e-3ff70fc1bee1","root_ids":["1345"],"roots":{"1345":"bfc3d1c7-8fc5-4ee9-8ec1-13f85c4a2242"}}];
+                  root.Bokeh.embed.embed_items(docs_json, render_items);
+                
+                  }
+                  if (root.Bokeh !== undefined) {
+                    embed_document(root);
+                  } else {
+                    let attempts = 0;
+                    const timer = setInterval(function(root) {
+                      if (root.Bokeh !== undefined) {
+                        clearInterval(timer);
+                        embed_document(root);
+                      } else {
+                        attempts++;
+                        if (attempts > 100) {
+                          clearInterval(timer);
+                          console.log("Bokeh: ERROR: Unable to run BokehJS code because BokehJS library is missing");
+                        }
+                      }
+                    }, 10, root)
+                  }
+                })(window);
+              });
+            };
+            if (document.readyState != "loading") fn();
+            else document.addEventListener("DOMContentLoaded", fn);
+          })();
+        </script>
+    
+  </body>
+  
+</html>
