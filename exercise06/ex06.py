@@ -4,6 +4,7 @@
 # Exercise 06
 
 # This is a program that processes a file about Stevens SSE Courses and displays some properties of the dataset through 4 different graphs
+# Each plot will be saved as an html file to the folder that this script is ran in
 
 # The program outputs the following information for the file
 # 1. Number of students in EM Courses by semester (Line chart)
@@ -73,14 +74,14 @@ avg_ISE = np.mean(df.loc['ISE'])
 avg_SSW = np.mean(df.loc['SSW'])
 avg_SYS = np.mean(df.loc['SYS'])
 
-output_file(filename="Average_Enrollment_by_Course.html", title="Average Enrollment by Course")
+output_file(filename="Average_Enrollment_by_Course.html", title="Average Enrollment by Program")
 
 # Create list of courses and average enrollment per course
 courses = list(df.index)
 counts = [avg_EM, avg_ES, avg_ISE, avg_SSW, avg_SYS]
 
-bar_chart = figure(x_range=courses, title="Average Enrollment by Course",
-           toolbar_location=None, tools="", y_axis_label='# of Students', x_axis_label='Course')
+bar_chart = figure(x_range=courses, title="Average Enrollment by Program",
+           toolbar_location=None, tools="", y_axis_label='# of Students', x_axis_label='Program')
 
 bar_chart.vbar(x=courses, top=counts, width=0.9)
 
@@ -129,13 +130,13 @@ pie_chart.wedge(x=0, y=1, radius=0.4,
         start_angle=cumsum('angle', include_zero=True), end_angle=cumsum('angle'),
         line_color="white", fill_color='color', legend_field='Course', source=data)
 
+
 pie_chart.axis.axis_label = None
 pie_chart.axis.visible = False
 pie_chart.grid.grid_line_color = None
 
 save(pie_chart)
 
-#show(row(line_plot,scatter_plot,bar_chart, pie_chart))
 
 # The code for the pie chart was based off the code from the Bokeh documentation shown below
 #https://docs.bokeh.org/en/latest/docs/gallery/pie_chart.html
