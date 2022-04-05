@@ -67,14 +67,14 @@ pros_analyzer = SentimentIntensityAnalyzer()
 pros_clean_text_str = ' '.join(pros_tokens)
 vad_sentiment = pros_analyzer.polarity_scores(pros_clean_text_str)
 
-pos = vad_sentiment ['pos']
-neg = vad_sentiment ['neg']
-neu = vad_sentiment ['neu']
+pos = vad_sentiment ['pos'] * 100
+neg = vad_sentiment ['neg'] * 100
+neu = vad_sentiment ['neu'] * 100
 
 print ('\nThe following is the distribution of the sentiment for the PROS file -')
-print (f'\n--- It is positive for {pos:.3f}')
-print (f'\n--- It is negative for {neg:.3f}')
-print (f'\n--- It is neutral for {neu:.3f}', '\n')
+print (f'\n--- It is positive for {pos:.1f}%')
+print (f'\n--- It is negative for {neg:.1f}%')
+print (f'\n--- It is neutral for {neu:.1f}%', '\n')
 
 # Calculate the sentiment using vader library
 cons_analyzer = SentimentIntensityAnalyzer()
@@ -83,14 +83,14 @@ cons_analyzer = SentimentIntensityAnalyzer()
 cons_clean_text_str = ' '.join(cons_tokens)
 vad_sentiment = pros_analyzer.polarity_scores(cons_clean_text_str)
 
-pos = vad_sentiment ['pos']
-neg = vad_sentiment ['neg']
-neu = vad_sentiment ['neu']
+pos = vad_sentiment ['pos'] * 100
+neg = vad_sentiment ['neg'] * 100
+neu = vad_sentiment ['neu'] * 100
 
 print ('\nThe following is the distribution of the sentiment for the CONS file -')
-print (f'\n--- It is positive for {pos:.3f}')
-print (f'\n--- It is negative for {neg:.3f}')
-print (f'\n--- It is neutral for {neu:.3f}', '\n')
+print (f'\n--- It is positive for {pos:.1f}%')
+print (f'\n--- It is negative for {neg:.1f}%')
+print (f'\n--- It is neutral for {neu:.1f}%', '\n')
 
 # Define the wordcloud parameters for pros file
 pros_wc = WordCloud(background_color = 'white', max_words=2000)
@@ -99,7 +99,7 @@ pros_wc = WordCloud(background_color = 'white', max_words=2000)
 pros_wc.generate(' '.join(pros_list))
 
 # storing to file
-#wc.to_file('pros.png')
+pros_wc.to_file('pros.png')
 
 # Show the cloud
 plt.imshow(pros_wc)
@@ -113,7 +113,7 @@ cons_wc = WordCloud(background_color = 'white', max_words=2000)
 cons_wc.generate(' '.join(cons_list))
 
 # storing to file
-#wc.to_file('cons.png')
+cons_wc.to_file('cons.png')
 
 # showing the cloud
 plt.imshow(cons_wc)
