@@ -34,37 +34,47 @@ for word in stopwords_file:
 # Update the stopword list 
 stopwords.extend(['pro','con','public','private','prison','prisons','zealand'])
 
-# Clean the pros input file
+# Create list of words from the pros input file
 for pros_file, pros_list in [(pros_file, pros_words)]:
     for line in pros_file:
         parts = line.strip().split()
         for word in parts:
-            # Check if word is non-numeric and longer than 3 characters
-            if (word.lower() not in stopwords) and (word.isalpha()) and (len(word)>3):
-               pros_list.append(word.lower())
+            pros_list.append(word.lower())
 
-# Clean the cons input file
+# Create list of words from the cons input file
 for cons_file, cons_list in [(cons_file, cons_words)]:
     for line in cons_file:
         parts = line.strip().split()
         for word in parts:
-             # Check if word is non-numeric and longer than 3 characters
-            if (word.lower() not in stopwords) and (word.isalpha()) and (len(word)>3):
-               cons_list.append(word.lower())
+            cons_list.append(word.lower())
 
 # Tokenize each text
 pros_tokens = nltk.word_tokenize(' '.join(pros_list))
 cons_tokens = nltk.word_tokenize(' '.join(cons_list))  
 
+# Create list of cleaned pros words
+cleaned_pros = []
+for token in pros_tokens:
+    # Only append tokens that are NOT stopwords, are alphanumeric, and are greater than 3 characters
+    if (token.lower() not in stopwords) and (token.isalnum()) and (len(token)>3):
+        cleaned_pros.append(token.lower())
+
+# Create list of cleaned cons words
+cleaned_cons = []
+for token in cons_tokens:
+    # Only append tokens that are NOT stopwords, are alphanumeric, and are greater than 3 characters
+    if (token.lower() not in stopwords) and (token.isalnum()) and (len(token)>3):
+        cleaned_cons.append(token.lower())
+
 # Extract bigrams for each text
-pros_bigrams = list(nltk.bigrams(pros_list))
-cons_bigrams = list(nltk.bigrams(cons_list))
+pros_bigrams = list(nltk.bigrams(cleaned_pros))
+cons_bigrams = list(nltk.bigrams(cleaned_cons))
 
 # Calculate the sentiment using vader library
 pros_analyzer = SentimentIntensityAnalyzer()
 
 # vader needs strings as input. Transforming the list into string
-pros_clean_text_str = ' '.join(pros_tokens)
+pros_clean_text_str = ' '.join(cleaned_pros)
 vad_sentiment = pros_analyzer.polarity_scores(pros_clean_text_str)
 
 pos = vad_sentiment ['pos'] * 100
@@ -80,7 +90,7 @@ print (f'\n--- It is neutral for {neu:.1f}%', '\n')
 cons_analyzer = SentimentIntensityAnalyzer()
 
 # vader needs strings as input. Transforming the list into string
-cons_clean_text_str = ' '.join(cons_tokens)
+cons_clean_text_str = ' '.join(cleaned_cons)
 vad_sentiment = pros_analyzer.polarity_scores(cons_clean_text_str)
 
 pos = vad_sentiment ['pos'] * 100
@@ -96,7 +106,7 @@ print (f'\n--- It is neutral for {neu:.1f}%', '\n')
 pros_wc = WordCloud(background_color = 'white', max_words=2000)
 
 # Generate word cloud for pros file
-pros_wc.generate(' '.join(pros_list))
+pros_wc.generate(' '.join(cleaned_pros))
 
 # storing to file
 pros_wc.to_file('pros.png')
@@ -110,7 +120,7 @@ plt.show()
 cons_wc = WordCloud(background_color = 'white', max_words=2000)
 
 # Generate word cloud for cons file
-cons_wc.generate(' '.join(cons_list))
+cons_wc.generate(' '.join(cleaned_cons))
 
 # storing to file
 cons_wc.to_file('cons.png')
